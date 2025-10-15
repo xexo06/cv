@@ -1,0 +1,917 @@
+
+/* ===== CV SIMPLE con control de tamaños ===== */
+.cv {
+  /* Ajusta solo ESTAS DOS variables */
+  --min-w: 900px; /* mínimo que NO debe achicarse más */
+  --max-w: 1200px; /* tope si la pantalla es muy grande */
+
+  /* No toques esto: mantiene proporción carta (8.5×11) */
+  width: clamp(var(--min-w), 92vw, var(--max-w));
+  aspect-ratio: 8.5 / 11; /* rectángulo carta */
+  height: auto; /* se calcula por aspect-ratio */
+
+  margin: 16px auto;
+  padding: 12px;
+  box-sizing: border-box;
+  background: #f8fafc;
+
+  /* Tu guía roja */
+  outline: 2px dashed #e11d48;
+  border-radius: 12px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columnas principales */
+  grid-template-rows: 1fr 1fr; /* 2 filas principales */
+  gap: 16px;
+
+  /* ==== añade estas 4 variables ==== */
+  --col1: 1fr; /* A y C (columna izquierda)  */
+  --col2: 1fr; /* B y D (columna derecha)   */
+  --row1: 1fr; /* A y B (fila superior)     */
+  --row2: 1fr; /* C y D (fila inferior)     */
+
+  /* ==== reemplaza estas dos líneas ==== */
+  grid-template-columns: var(--col1) var(--col2);
+  grid-template-rows: var(--row1) var(--row2);
+
+  /* 1) Texto fluido (escala suave en pantallas chicas) */
+  font-size: clamp(12px, 1.2vw, 16px);
+
+
+  outline: none !important;                 /* quita guía roja */
+  background:
+    radial-gradient(1200px 600px at 20% 0%, var(--cv-bg-1), transparent 60%),
+    radial-gradient(900px 500px at 100% 20%, var(--cv-bg-2), transparent 60%),
+    linear-gradient(#f8fafc, #f4f6fa);
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
+  padding: 16px;     
+}
+.cols-20-80 {
+  --col1: 2fr;
+  --col2: 8fr;
+}
+.cols-30-70 {
+  --col1: 3fr;
+  --col2: 7fr;
+}
+.cols-40-60 {
+  --col1: 4fr;
+  --col2: 6fr;
+}
+.cols-50-50 {
+  --col1: 1fr;
+  --col2: 1fr;
+}
+.cols-60-40 {
+  --col1: 6fr;
+  --col2: 4fr;
+}
+.cols-70-30 {
+  --col1: 7fr;
+  --col2: 3fr;
+}
+.cols-80-20 {
+  --col1: 8fr;
+  --col2: 2fr;
+}
+
+.rows-20-80 {
+  --row1: 2fr;
+  --row2: 8fr;
+}
+.rows-30-70 {
+  --row1: 3fr;
+  --row2: 7fr;
+}
+.rows-40-60 {
+  --row1: 4fr;
+  --row2: 6fr;
+}
+.rows-60-40 {
+  --row1: 6fr;
+  --row2: 4fr;
+}
+.rows-70-30 {
+  --row1: 7fr;
+  --row2: 3fr;
+}
+.rows-80-20 {
+  --row1: 8fr;
+  --row2: 2fr;
+}
+.rows-25-75 {
+  --row1: 1fr;
+  --row2: 4fr;
+}
+
+/* Celdas A/B/C/D */
+.cv__cell {
+  background: #fff;
+  border: 2px solid #1f2937;
+  border-radius: 10px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* subgrid 2x2 */
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  overflow: hidden;
+  /* ==== añade estas 4 variables ==== */
+  --col1: 1fr; /* A y C (columna izquierda)  */
+  --col2: 1fr; /* B y D (columna derecha)   */
+  --row1: 1fr; /* A y B (fila superior)     */
+  --row2: 1fr; /* C y D (fila inferior)     */
+
+  /* ==== reemplaza estas dos líneas ==== */
+  grid-template-columns: var(--col1) var(--col2);
+  grid-template-rows: var(--row1) var(--row2);
+
+  border: none !important;                  /* quita borde negro */
+  background: var(--paper);
+  box-shadow: var(--shadow-1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cell-cols-20-80 {
+  --col1: 2fr;
+  --col2: 8fr;
+}
+.cell-cols-30-70 {
+  --col1: 3fr;
+  --col2: 7fr;
+}
+.cell-cols-40-60 {
+  --col1: 4fr;
+  --col2: 6fr;
+}
+.cell-cols-50-50 {
+  --col1: 1fr;
+  --col2: 1fr;
+}
+.cell-cols-60-40 {
+  --col1: 6fr;
+  --col2: 4fr;
+}
+.cell-cols-70-30 {
+  --col1: 7fr;
+  --col2: 3fr;
+}
+.cell-cols-80-20 {
+  --col1: 8fr;
+  --col2: 2fr;
+}
+
+.cell-rows-20-80 {
+  --row1: 2fr;
+  --row2: 8fr;
+}
+.cell-rows-30-70 {
+  --row1: 3fr;
+  --row2: 7fr;
+}
+.cell-rows-40-60 {
+  --row1: 4fr;
+  --row2: 6fr;
+}
+.cell-rows-60-40 {
+  --row1: 6fr;
+  --row2: 4fr;
+}
+.cell-rows-70-30 {
+  --row1: 7fr;
+  --row2: 3fr;
+}
+.cell-rows-80-20 {
+  --row1: 8fr;
+  --row2: 2fr;
+}
+/* Cajas internas (A1…D4) */
+.box {
+  border: 2px dashed #64748b;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+  color: #0f172a;
+}
+
+.vspan2-left {
+  /* ocupa A1 + A3 (columna izquierda completa) */
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.hspan2-bottom {
+  /* ocupa B3 + B4 (toda la fila inferior) */
+  grid-row: 2;
+  grid-column: 1 / span 2;
+}
+
+/* Impresión: tamaño carta exacto */
+@media print {
+  @page {
+    size: Letter portrait;
+    margin: 0.5in;
+  }
+  .cv {
+    width: 8.5in;
+    height: 11in;
+    aspect-ratio: auto;
+    outline: none;
+    background: #fff;
+  }
+}
+
+@media (max-width: 900px) {
+  .cv {
+    --min-w: 0px; /* así el clamp usa 92vw y sí se reduce */
+    gap: 12px; /* un poquito menos de separación */
+    padding: 10px;
+  }
+}
+
+/* 3) Opción simple de “stack” en pantallas muy chicas (vertical A, B, C, D) */
+@media (max-width: 600px) {
+  .cv {
+    grid-template-columns: 1fr; /* 1 columna */
+    grid-template-rows: auto auto auto auto; /* 4 filas (A,B,C,D) */
+  }
+  .cv__cell {
+    overflow: auto;
+  } /* si algo no cabe, scrollea dentro de la celda */
+}
+
+/* Caja especial para la foto */
+.boxA1--photo {
+  /* sobrescribe el centrado de .box */
+  display: grid;
+  place-items: start center; /* centrado horizontal, arriba vertical */
+  padding: 16px;
+  border: none; /* sin borde punteado en la foto */
+  background: transparent;
+}
+
+/* La foto circular */
+.boxA1--photo img {
+  width: clamp(140px, 40%, 220px); /* tamaño responsivo */
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 20%; /* “sube” el encuadre (frente/cabello) */
+  transform: translateY(-6%); /* la empuja ligeramente hacia arriba */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 4px solid #fff; /* aro blanco */
+  outline: 3px solid #1f2937; /* aro externo (combina con tus bordes) */
+}
+
+/* (Opcional) en móviles, baja un poquito menos */
+@media (max-width: 600px) {
+  .boxA1--photo img {
+    transform: translateY(-3%);
+  }
+}
+
+.box--info {
+  /* responsive basado en el ancho del propio A2 */
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  text-align: left;
+  background: #fff;
+  border: 2px dashed #64748b; /* igual estilo que tus boxes */
+  border-radius: 10px;
+}
+
+.cv-name {
+  font-weight: 700;
+  font-size: clamp(18px, 2.2cqw, 28px);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.cv-title {
+  font-weight: 500;
+  color: #334155;
+  font-size: clamp(14px, 1.8cqw, 18px);
+  line-height: 1.25;
+  margin: 2px 0 6px;
+}
+
+.cv-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+  font-size: clamp(12px, 1.6cqw, 16px);
+}
+
+/* solo LinkedIn es clickeable */
+.cv-contact a {
+  text-decoration: none;
+  color: #2563eb;
+  border-bottom: 1px dashed transparent;
+}
+.cv-contact a:hover {
+  border-bottom-color: currentColor;
+}
+
+/* evita que se rompa la caja si el texto es largo */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* b1 y b2 estilado y responsive a su propio ancho */
+.box--skills {
+  container-type: inline-size; /* permite cqw responsive */
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 2px dashed #64748b;
+  border-radius: 10px;
+  overflow: hidden; /* si hay mucho contenido */
+}
+
+/* Encabezados y texto */
+.skills-lang {
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+  color: #0f172a;
+  font-size: clamp(12px, 1.6cqw, 15px);
+}
+
+.skills-h {
+  margin: 4px 0 2px;
+  text-align: center;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+  font-size: clamp(13px, 1.9cqw, 18px);
+  text-transform: uppercase;
+}
+
+/* Lista de chips */
+.skills-chips {
+  --gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  justify-content: center;
+}
+
+/* Chip base */
+.chip {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #94a3b8;
+  background: #f8fafc;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  font-size: clamp(11px, 1.6cqw, 14px);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+}
+
+/* Variante más suave (para “básicas”) */
+.chip--soft {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+  font-weight: 500;
+}
+
+/* Hover sutil (opcional) */
+.chip:hover {
+  border-color: #64748b;
+}
+
+/* En pantallas muy pequeñas (cuando A4 se estrecha) */
+@container (max-width: 360px) {
+  .skills-chips {
+    --gap: 6px;
+  }
+  .chip {
+    padding: 3px 8px;
+  }
+}
+
+/* bloque perfil dentro de b1 y b2 */
+.skills-profile {
+  display: grid;
+  gap: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0; /* separador sutil */
+}
+
+.skills-p {
+  margin: 0;
+  color: #0f172a;
+  line-height: 1.45;
+  text-wrap: pretty;
+  font-size: clamp(12px, 1.7cqw, 15px); /* responde al ancho de A4 */
+}
+/* Variante densa para meter más chips por fila */
+.skills-chips--dense{
+  --gap: 6px;                 /* antes 8px */
+  justify-content: flex-start; /* compacta hacia la izquierda */
+}
+
+.chip--dense{
+  padding: 3px 8px;                      /* antes 4px 10px */
+  font-size: clamp(10px, 1.3cqw, 12px);  /* un poco más chico */
+  line-height: 1.1;
+  border-radius: 9999px;                 /* pill */
+  box-shadow: none;                      /* menos alto visual */
+}
+
+/* Aún más compacto cuando el contenedor es angosto */
+@container skills (max-width: 420px){
+  .skills-chips--dense{ --gap: 4px; }
+  .chip--dense{ padding: 2px 6px; font-size: clamp(9px, 1.2cqw, 11px); }
+}
+// hasta que lelga b1 y B2
+
+// B3
+/* ===== B3 – Certificaciones (bloque completo) ===== */
+.b3-certs{
+  align-items: start;
+  justify-items: stretch;
+  min-height: 0;
+  // height: 100%;                 /* llena el alto disponible del cuadro */
+  max-height: 100%;
+  overflow: auto;               /* si se pasa, scrollea dentro */
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 2px dashed #64748b;
+  border-radius: 10px;
+  background: #fff;
+
+  /* container queries basadas en el ancho de B3 */
+  container-type: inline-size;
+  container-name: certs;
+}
+
+/* Variante compacta (menos padding/gaps/títulos) */
+.b3-certs--compact{
+  gap: 8px;
+  padding: 8px 10px;
+}
+
+/* Header */
+.certs-head{
+  position: sticky; top: 0; z-index: 1;
+  background: #fff;
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+.certs-title{
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .3px;
+  font-size: clamp(11px, 1.4cqw, 13px);
+}
+.certs-sub{
+  margin: 0;
+  color: #64748b;
+  font-style: italic;
+  font-size: clamp(10px, 1.1cqw, 12px);
+  white-space: nowrap;
+}
+
+/* Lista base */
+.certs-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+/* Tarjeta */
+.certs-list--compact .cert{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 5px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  width: 100%;
+  box-sizing: border-box;
+}
+.cert-ico{ width: 1.2em; text-align: center; }
+.cert-main{ display: grid; gap: 2px; min-width: 0; }
+.cert-link{
+  display: inline-block;
+  color: #2563eb; text-decoration: none; font-weight: 700;
+  font-size: clamp(11px, 1.4cqw, 13px);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cert-link:hover{ text-decoration: underline; }
+.cert-meta{ color: #64748b; font-size: clamp(10px, 1.2cqw, 12px); white-space: nowrap; }
+.cert-ext{ opacity: .6; font-size: .9rem; }
+
+/* Mensaje vacío */
+.certs-empty{ margin: 0; color: #64748b; font-size: clamp(11px, 1.4cqw, 13px); }
+
+/* ===== 2 tarjetas por fila ===== */
+.certs-list--two{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+/* Si B3 se hace angosto, vuelve a 1 columna automáticamente */
+@container certs (max-width: 520px){
+  .certs-list--two{ grid-template-columns: 1fr; }
+  .certs-sub{ display: none; } /* ahorra espacio extra */
+}
+
+
+
+// hasta B3
+
+// D2
+/* ===== D2 – Achievements con límite estricto del cuadro ===== */
+.d2-achv {
+  /* anula centrado de .box y asegura contención */
+  align-items: start;
+  justify-items: stretch;
+  // height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto; /* scroll dentro si sobra */
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 2px dashed #64748b;
+  border-radius: 10px;
+  container-type: inline-size; /* tipografías con cqw */
+}
+
+/* Cabecera pro, fija al hacer scroll */
+.achv-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.achv-title {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  font-size: clamp(13px, 2cqw, 18px);
+}
+.achv-sub {
+  margin: 2px 0 0;
+  color: #475569;
+  font-style: italic;
+  font-size: clamp(11px, 1.6cqw, 14px);
+}
+
+/* Lista con línea guía y emojis */
+.achv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 10px;
+  display: grid;
+  gap: 10px;
+  position: relative;
+}
+/* línea vertical suave */
+.achv-list::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(#e2e8f0, transparent);
+  border-radius: 2px;
+}
+
+.achv-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: clamp(12px, 1.6cqw, 15px);
+  line-height: 1.45;
+}
+.achv-ico {
+  width: 1.25em;
+  text-align: center;
+}
+.achv-text {
+  color: #0f172a;
+  text-wrap: pretty;
+}
+
+/* Seguridad global para contención (por si faltaba) */
+.cv__grid {
+  height: 100%;
+  min-height: 0;
+}
+.cv__cell {
+  min-height: 0;
+  overflow: hidden;
+}
+.box {
+  min-width: 0;
+  min-height: 0;
+}
+
+// Hasta D2
+
+// datos de experiencia laboral
+/* Contenedor de experiencia que respeta el cuadro */
+.box--exp {
+  container-type: inline-size; /* tipografías responden al ancho de la caja */
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto; /* si hay mucho texto, scroll dentro */
+  padding: 10px 12px;
+  border: 2px dashed #64748b;
+  border-radius: 10px;
+  background: #fff;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+/* Títulos */
+.exp-h {
+  margin: 0 0 2px;
+  text-transform: uppercase;
+  font-weight: 800;
+  text-align: left;
+  font-size: clamp(12px, 1.8cqw, 16px);
+}
+
+.exp-item {
+  display: grid;
+  gap: 3px;
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 8px;
+}
+.exp-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.exp-company {
+  margin: 0;
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  font-size: clamp(12px, 1.7cqw, 15px);
+}
+
+.exp-role {
+  font-weight: 600;
+  color: #334155;
+  font-size: clamp(11px, 1.6cqw, 14px);
+}
+
+.exp-date {
+  font-style: italic;
+  color: #475569;
+  font-size: clamp(10px, 1.4cqw, 13px);
+}
+
+.exp-desc {
+  margin: 4px 0 2px;
+  color: #0f172a;
+  line-height: 1.45;
+  text-wrap: pretty;
+  font-size: clamp(11px, 1.6cqw, 14px);
+}
+
+/* bullets opcionales */
+.exp-bullets {
+  margin: 0;
+  padding-left: 18px;
+  color: #0f172a;
+  font-size: clamp(10px, 1.4cqw, 13px);
+}
+.exp-bullets li {
+  margin: 2px 0;
+}
+
+/* === D4 PANE: SIEMPRE dentro del cuadro (scroll interno si sobra) === */
+.d4-pane {
+  // height: 100%;
+  min-height: 0;
+  max-height: 100%;
+
+  overflow: auto; /* nada se sale del marco de D4 */
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 2px dashed #64748b;
+  border-radius: 10px;
+  background: #fff;
+  container-type: inline-size; /* tipografías responsivas con cqw */
+}
+
+/* Cabecera llamativa */
+.pane-head {
+  position: sticky;
+  top: 0; /* queda fija al hacer scroll */
+  background: #fff;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 1;
+}
+.pane-title {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 900;
+  color: var(--ink);
+  font-size: clamp(13px, 2cqw, 18px);
+}
+.pane-sub {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-style: italic;
+  font-size: clamp(11px, 1.6cqw, 14px);
+}
+
+/* Secciones internas */
+.pane-sec {
+  display: grid;
+  gap: 8px;
+}
+
+/* Títulos de sección (reutiliza tu estilo) */
+.sb-h {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  font-size: clamp(12px, 1.8cqw, 15px);
+}
+
+/* Listas limpias y compactas */
+.sb-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  font-size: clamp(11px, 1.6cqw, 14px);
+  line-height: 1.45;
+}
+.sb-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: start;
+}
+.sb-ico {
+  width: 1.2em;
+  text-align: center;
+}
+.sb-text a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+}
+.sb-text a:hover {
+  border-bottom-color: currentColor;
+}
+
+/* Referencias un poco más sobrias */
+.sb-refs .sb-text {
+  color: var(--ink);
+}
+.sb-refs em {
+  color: var(--muted);
+}
+
+// hasta D4
+
+
+
+// codigo para quitar bordes y mejorar la vista del CV
+/* ===== THEME: Aurora Edge (borde degradado premium) ===== */
+:root{
+  --paper:#ffffff;
+  --ink:#0f172a;
+  --muted:#5b677a;
+  --accent:#0ea5e9;        /* cian */
+  --accent2:#7c3aed;       /* púrpura */
+  --accent3:#22c55e;       /* verde */
+  --accent4:#f59e0b;       /* ámbar */
+  --soft-shadow:0 10px 30px rgba(2,6,23,.12);
+}
+
+/* Fondo del lienzo (fuera de la hoja) con textura suave */
+body{
+  background:
+    radial-gradient(1200px 700px at 12% -10%, #eef2ff 0%, transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, #e8fafc 0%, transparent 55%),
+    linear-gradient(180deg,#f7fafc 0%, #f3f4f6 100%);
+}
+
+/* Hoja con borde degradado (no usa border: para no cortar el gradiente) */
+.cv{
+  position: relative;
+  background: var(--paper);
+  border-radius: 16px;
+  box-shadow: var(--soft-shadow), 0 0 0 6px rgba(255,255,255,.75);
+  padding: 20px;
+  /* quitamos cualquier borde previo */
+  border: none !important;
+  outline: none !important;
+}
+
+/* Marco degradado: capa detrás de la hoja */
+.cv::after{
+  content:"";
+  position:absolute; inset:-2px;           /* grosor total del marco */
+  border-radius: 18px;
+  background:
+    conic-gradient(
+      from 0deg,
+      var(--accent), var(--accent2), var(--accent3),
+      var(--accent4), var(--accent), var(--accent2)
+    );
+  z-index:-1;
+  animation: aurora-spin 18s linear infinite;
+  /* recorte para que parezca un borde de ~2px */
+  -webkit-mask:
+    radial-gradient(closest-side, transparent calc(100% - 2px), #000 0);
+          mask: radial-gradient(closest-side, transparent calc(100% - 2px), #000 0);
+  filter: saturate(115%) contrast(105%);
+}
+
+/* Sombra interior mínima a cada celda para separar contenido */
+.cv__cell{
+  border: 1px solid rgba(2,6,23,.06);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(2,6,23,.06);
+}
+
+/* Detalles de color coherentes */
+.cv-contact a,
+.sb-text a,
+.cert-link{ color:#2563eb; }
+.skills-h,.exp-h,.pane-title,.achv-title{ color:var(--ink); letter-spacing:.3px; }
+.chip{ border-color:#dbeafe; background:#f5f8ff; }
+.chip--soft{ border-color:#e5e7eb; background:#f7f7fb; }
+.achv-list::before{ background:linear-gradient(#e9ecff,transparent); }
+.boxA1--photo img{ border:4px solid #fff; box-shadow:0 8px 28px rgba(2,6,23,.15); }
+
+/* Sutil “filete” superior, combina con el borde */
+.cv::before{
+  content:"";
+  position:absolute; left:28px; right:28px; top:18px; height:4px;
+  border-radius:999px;
+  background: linear-gradient(90deg, transparent 0 8%, #c7d2fe 30%, #a5f3fc 50%, #fde68a 70%, transparent 92%);
+  pointer-events:none;
+  opacity:.8;
+}
+
+/* Animación lenta (elegante) */
+@keyframes aurora-spin{
+  to{ transform: rotate(360deg); }
+}
+
+/* Accesibilidad: reduce movimiento si el usuario lo pide */
+@media (prefers-reduced-motion: reduce){
+  .cv::after{ animation:none; }
+}
+
+/* Impresión: hoja blanca, sin animación ni colores de fondo */
+@media print{
+  body{ background:#fff !important; }
+  .cv{ box-shadow:none !important; padding:20px; }
+  .cv::after, .cv::before{ display:none !important; }
+  .cv__cell{ border:none !important; box-shadow:none !important; }
+}

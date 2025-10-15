@@ -1,0 +1,248 @@
+
+<div class="cv cols-50-50 rows-25-75">
+  <!-- A -->
+  <section class="cv__cell cell-cols-30-70">
+      <!-- A1 -->
+    <div class="box boxA1--photo vspan2-left">
+      <img [src]="photoUrl" [alt]="photoAlt">
+    </div> 
+    <!-- A2 -->
+    <div class="box box--info">
+      <h1 class="cv-name">{{ nombreYApellidos }}</h1>
+      <h2 class="cv-title">{{ presentacion }}</h2>
+
+      <ul class="cv-contact">
+        <li class="truncate">{{ direccion }}</li>
+        <li class="truncate">{{ email }}</li>
+        <li class="truncate">{{ phone }}</li>
+        <li class="truncate">
+          <a [href]="linkedin" target="_blank" rel="noopener noreferrer">
+            {{ linkedin }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- A4 -->
+   <div class="box box--skills">
+      <p class="skills-lang">Idiomas: {{ idiomas }}</p>
+      <!-- PERFIL -->
+      <div class="skills-profile">
+        <h3 class="skills-h">Perfil</h3>
+        <p class="skills-p">{{ profile }}</p>
+      </div>
+
+      
+    </div>
+  </section>
+
+  <!-- B -->
+  <section class="cv__cell cell-rows-60-40 ">
+    <!-- B1 -->
+    <div class="box box--skills">
+      <h3 class="skills-h">Software y tecnologías con experiencia sólida:</h3>
+      <ul class="skills-chips skills-chips--dense">
+        <li class="chip chip--dense" *ngFor="let s of skillsSolidas">{{ s }}</li>
+      </ul>
+    </div>
+    <!-- B2 -->
+    <div class="box box--skills">
+      <h3 class="skills-h">Tecnologías con experiencia básica o intermedia:</h3>
+      <ul class="skills-chips skills-chips--dense">
+        <li class="chip chip--soft chip--dense" *ngFor="let s of skillsBasicas">{{ s }}</li>
+      </ul>
+    </div>
+      
+    <!-- B3: Certificaciones -->
+      <!-- B3 -->
+    <div class="box b3-certs b3-certs--compact hspan2-bottom">
+      <header class="certs-head">
+        <h3 class="certs-title">Certificaciones</h3>
+        <p class="certs-sub">Links verificables</p>
+      </header>
+
+      <ng-container *ngIf="certs?.length; else noCerts">
+        <ul class="certs-list certs-list--compact certs-list--two">
+          <li class="cert" *ngFor="let c of certs">
+            <span class="cert-ico">🎓</span>
+            <div class="cert-main">
+              <a class="cert-link" [href]="c.url" target="_blank" rel="noopener noreferrer">
+                {{ c.title }}
+              </a>
+              <small class="cert-meta">{{ c.issuer }} • {{ c.year }}</small>
+            </div>
+            <span class="cert-ext" aria-hidden="true">↗</span>
+          </li>
+        </ul>
+      </ng-container>
+
+      <ng-template #noCerts>
+        <p class="certs-empty">Agrega tus certificados y se mostrarán aquí.</p>
+      </ng-template>
+    </div>
+
+  </section>
+
+  <!-- C -->
+  <section class="cv__cell">
+   <!-- C1 -->
+  <div class="box box--exp">
+    <h3 class="exp-h">Experiencia laboral</h3>
+    <ng-container *ngFor="let e of expCols[0]">
+      <article class="exp-item">
+        <h4 class="exp-company">{{ e.empresa }}</h4>
+        <div class="exp-role">{{ e.cargo }}</div>
+        <div class="exp-date">{{ e.fecha }}</div>
+        <p class="exp-desc">{{ e.resumen }}</p>
+        <ul class="exp-bullets" *ngIf="e.bullets?.length">
+          <li *ngFor="let b of e.bullets">{{ b }}</li>
+        </ul>
+      </article>
+    </ng-container>
+  </div>
+
+  <!-- C2 -->
+  <div class="box box--exp">
+    <ng-container *ngFor="let e of expCols[1]">
+      <article class="exp-item">
+        <h4 class="exp-company">{{ e.empresa }}</h4>
+        <div class="exp-role">{{ e.cargo }}</div>
+        <div class="exp-date">{{ e.fecha }}</div>
+        <p class="exp-desc">{{ e.resumen }}</p>
+        <ul class="exp-bullets" *ngIf="e.bullets?.length">
+          <li *ngFor="let b of e.bullets">{{ b }}</li>
+        </ul>
+      </article>
+    </ng-container>
+  </div>
+
+  <!-- C3 -->
+  <div class="box box--exp">
+    <ng-container *ngFor="let e of expCols[2]">
+      <article class="exp-item">
+        <h4 class="exp-company">{{ e.empresa }}</h4>
+        <div class="exp-role">{{ e.cargo }}</div>
+        <div class="exp-date">{{ e.fecha }}</div>
+        <p class="exp-desc">{{ e.resumen }}</p>
+        <ul class="exp-bullets" *ngIf="e.bullets?.length">
+          <li *ngFor="let b of e.bullets">{{ b }}</li>
+        </ul>
+      </article>
+    </ng-container>
+  </div>
+
+  <!-- C4 -->
+  <div class="box box--exp">
+    <ng-container *ngFor="let e of expCols[3]">
+      <article class="exp-item">
+        <h4 class="exp-company">{{ e.empresa }}</h4>
+        <div class="exp-role">{{ e.cargo }}</div>
+        <div class="exp-date">{{ e.fecha }}</div>
+        <p class="exp-desc">{{ e.resumen }}</p>
+        <ul class="exp-bullets" *ngIf="e.bullets?.length">
+          <li *ngFor="let b of e.bullets">{{ b }}</li>
+        </ul>
+      </article>
+    </ng-container>
+  </div>
+  </section>
+
+  <!-- D -->
+  <section class="cv__cell">
+      <!-- D1 -->
+    <div class="box box--exp">
+      <ng-container *ngFor="let e of expCols[4]">
+        <article class="exp-item">
+          <h4 class="exp-company">{{ e.empresa }}</h4>
+          <div class="exp-role">{{ e.cargo }}</div>
+          <div class="exp-date">{{ e.fecha }}</div>
+          <p class="exp-desc">{{ e.resumen }}</p>
+          <ul class="exp-bullets" *ngIf="e.bullets?.length">
+            <li *ngFor="let b of e.bullets">{{ b }}</li>
+          </ul>
+        </article>
+      </ng-container>
+    </div>
+
+    <!-- D2 (lo dejamos vacío / otro contenido) -->
+    <!-- D2 -->
+    <div class="box d2-achv">
+      <header class="achv-head">
+        <h3 class="achv-title">{{ logrosTitulo }}</h3>
+        <p class="achv-sub">Aportes con impacto real</p>
+      </header>
+
+      <ul class="achv-list">
+        <li class="achv-item" *ngFor="let l of logros">
+          <span class="achv-ico">{{ l.icon }}</span>
+          <span class="achv-text">{{ l.text }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- D3 -->
+    <div class="box box--exp">
+      <ng-container *ngFor="let e of expCols[5]">
+        <article class="exp-item">
+          <h4 class="exp-company">{{ e.empresa }}</h4>
+          <div class="exp-role">{{ e.cargo }}</div>
+          <div class="exp-date">{{ e.fecha }}</div>
+          <p class="exp-desc">{{ e.resumen }}</p>
+          <ul class="exp-bullets" *ngIf="e.bullets?.length">
+            <li *ngFor="let b of e.bullets">{{ b }}</li>
+          </ul>
+        </article>
+      </ng-container>
+    </div>
+
+    
+
+    <!-- D4 (vacío) -->
+     
+    <div class="box d4-pane">
+      <header class="pane-head">
+        <h3 class="pane-title">Formación & Referencias</h3>
+        <p class="pane-sub">Lo que me respalda</p>
+      </header>
+
+      <section class="pane-sec">
+        <h4 class="sb-h">Estudios</h4>
+        <ul class="sb-list">
+          <li *ngFor="let e of estudios">
+            <span class="sb-ico">🎓</span>
+            <span class="sb-text">
+              <ng-container *ngIf="e.url; else noLink">
+                <a [href]="e.url" target="_blank" rel="noopener noreferrer">{{ e.texto }}</a>
+              </ng-container>
+              <ng-template #noLink>{{ e.texto }}</ng-template>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="pane-sec">
+        <h4 class="sb-h">Fortalezas</h4>
+        <ul class="sb-list">
+          <li *ngFor="let f of fortalezas">
+            <span class="sb-ico">💪</span>
+            <span class="sb-text">{{ f }}</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="pane-sec">
+        <h4 class="sb-h">Referencias</h4>
+        <ul class="sb-list sb-refs">
+          <li *ngFor="let r of referencias">
+            <span class="sb-ico">👥</span>
+            <span class="sb-text">
+              <strong>{{ r.empresa }}</strong> — {{ r.tel }},
+              <em>{{ r.persona }}</em>
+            </span>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+  </section>
+</div>
