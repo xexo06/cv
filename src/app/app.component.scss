@@ -704,9 +704,12 @@
 .exp-desc {
   margin: 4px 0 2px;
   color: #0f172a;
-  line-height: 1.45;
+
   text-wrap: pretty;
-  font-size: clamp(11px, 1.6cqw, 14px);
+  // font-size: clamp(11px, 1.6cqw, 14px);
+  //   line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 /* bullets opcionales */
@@ -714,7 +717,9 @@
   margin: 0;
   padding-left: 18px;
   color: #0f172a;
-  font-size: clamp(10px, 1.4cqw, 13px);
+  // font-size: clamp(10px, 1.4cqw, 13px);
+   font-size: 12px;
+  
 }
 .exp-bullets li {
   margin: 2px 0;
